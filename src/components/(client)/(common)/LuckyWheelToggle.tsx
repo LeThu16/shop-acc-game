@@ -122,7 +122,7 @@ const LuckyWheelToggle: React.FC = () => {
             </div>
 
             {/* Your existing LuckyWheel component */}
-            <LuckyWheel />
+            <LuckyWheel onCloseModal={() => setIsModalOpen(false)} />
           </div>
         </div>
       )}

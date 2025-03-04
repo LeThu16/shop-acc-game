@@ -12,8 +12,11 @@ interface Prize {
   message: string;
   icon?: IconType;
 }
+interface LuckyWheelProps {
+  onCloseModal?: () => void; // Nhận prop để đóng modal từ cha
+}
 
-const LuckyWheel: React.FC = () => {
+const LuckyWheel: React.FC<LuckyWheelProps> = ({ onCloseModal }) => {
   const [rotation, setRotation] = useState<number>(0);
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [prize, setPrize] = useState<string>("");
@@ -58,8 +61,7 @@ const LuckyWheel: React.FC = () => {
     setRotation(rotation + totalRotation);
 
     setTimeout(() => {
-      const finalPrize = getPrize(rotation + totalRotation);
-      setPrize(finalPrize);
+      setPrize(getPrize(rotation + totalRotation));
       setShowCongrats(true);
       setIsSpinning(false);
     }, 5000);
@@ -67,7 +69,10 @@ const LuckyWheel: React.FC = () => {
 
   const handleClose = () => {
     setShowCongrats(false);
-    setPrize(""); // Reset lại giải thưởng để tránh hiển thị sai khi quay lại
+    setPrize("");
+    if (onCloseModal) {
+      onCloseModal();
+    }
   };
   
   const CustomModal = ({ title, isOpen, onClose, children }: { title: string; isOpen: boolean; onClose: () => void; children: React.ReactNode }) => {
@@ -159,10 +164,17 @@ const LuckyWheel: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <CustomModal title="Chúc mừng!" isOpen={showCongrats} onClose={handleClose}>
-        <p className="text-center">{prize}</p>
-      </CustomModal>
+      {showCongrats && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h3 className="text-xl font-bold text-yellow-500">Chúc mừng!</h3>
+            <p className="mt-4">{prize}</p>
+            <button onClick={handleClose} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+              Đóng
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
