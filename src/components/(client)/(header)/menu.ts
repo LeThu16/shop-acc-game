@@ -19,7 +19,8 @@ export const menu: IMenuItem[] = [
     label: "Trang chủ"
   },
   {
-    label: "Danh mục"
+    label: "Danh mục",
+    path:'/category'
   },
   {
     label: "Nạp thẻ"

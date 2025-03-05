@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Card, Badge } from "antd";
+import { Card, Badge, Button } from "antd";
 import { ShoppingCartOutlined, RightOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
@@ -32,6 +32,10 @@ const BoxCommon: React.FC<BoxCommonProps> = ({
   badgeText = "NEW",
   showPrice = true
 }) => {
+  const handleRedirect = () =>{
+    console.log('ád');
+    
+  }
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
@@ -48,6 +52,7 @@ const BoxCommon: React.FC<BoxCommonProps> = ({
           <Card
             key={item.id}
             hoverable
+            onClick={()=>handleRedirect()}
             className="overflow-hidden border rounded-lg"
             cover={
               <div className="relative bg-purple-100 flex items-center justify-center overflow-hidden">
@@ -104,11 +109,17 @@ const BoxCommon: React.FC<BoxCommonProps> = ({
               )}
 
               {/* Nút thêm vào giỏ hàng nếu là sản phẩm */}
-              {showPrice && (
-                <button className="mt-3 w-full bg-blue-600 text-white py-1 px-2 rounded-md flex items-center justify-center text-sm">
+              {/* {showPrice && ( */}
+              <div className="flex items-center gap-2 flex-col">
+                <button className="mt-3 w-full bg-blue-500 text-white py-1 px-2 rounded-md flex items-center justify-center text-sm hover:bg-blue-600 transition">
                   <ShoppingCartOutlined className="mr-1" /> Thêm vào giỏ hàng
                 </button>
-              )}
+                <button className="w-full bg-pink-100 text-pink-500 py-1 px-2 rounded-md flex items-center justify-center text-sm hover:text-white hover:bg-pink-500 transition">
+                  Mua ngay
+                </button>
+              </div>
+
+              {/* )} */}
             </div>
           </Card>
         ))}
