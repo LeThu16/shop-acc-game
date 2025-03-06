@@ -54,6 +54,8 @@ const LuckyWheel: React.FC<LuckyWheelProps> = ({ onCloseModal }) => {
 
     setIsSpinning(true);
 
+    console.log(clickCount)
+
     const randomDegrees = Math.floor(Math.random() * 360);
     const spinCount = Math.floor(Math.random() * 3) + 2; // 2-5 full rotations
     const totalRotation = spinCount * 360 + randomDegrees;
