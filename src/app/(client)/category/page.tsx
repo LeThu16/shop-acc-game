@@ -1,4 +1,4 @@
 const Category = () =>{
-    return <div>Category 1</div>
+    return <div>Category </div>
 }
 export default Category
